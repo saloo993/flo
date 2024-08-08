@@ -1,0 +1,108 @@
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Leaf } from 'lucide-react';
+
+const mbtiPlants = {
+  ISTJ: {
+    plant: "질경이",
+    description: "실용적이고 신뢰할 수 있는 ISTJ처럼, 질경이는 견고하고 적응력이 뛰어나며 다양한 환경에서 잘 자랍니다."
+  },
+  ISFJ: {
+    plant: "이팝나무",
+    description: "따뜻하고 헌신적인 ISFJ처럼, 이팝나무는 아름다운 꽃을 피우며 주변 환경을 아름답게 만듭니다."
+  },
+  INFJ: {
+    plant: "산철쭉",
+    description: "이상주의적이고 창의적인 INFJ처럼, 산철쭉은 아름다운 꽃을 피우며 고요한 산속에서 자라납니다."
+  },
+  INTJ: {
+    plant: "두메대극",
+    description: "독립적이고 혁신적인 INTJ처럼, 두메대극은 높은 산에서 자라며 독특한 특성을 가지고 있습니다."
+  },
+  ISTP: {
+    plant: "갯개미취",
+    description: "대담하고 실용적인 ISTP처럼, 갯개미취는 척박한 해안가에서도 잘 적응하며 자랍니다."
+  },
+  ISFP: {
+    plant: "갯메꽃",
+    description: "예술적이고 유연한 ISFP처럼, 갯메꽃은 아름다운 꽃을 피우며 바닷가 모래 언덕에 적응합니다."
+  },
+  INFP: {
+    plant: "어리연꽃",
+    description: "이상주의적이고 적응력 있는 INFP처럼, 어리연꽃은 수면에 떠서 자라며 아름다운 꽃을 피웁니다."
+  },
+  INTP: {
+    plant: "큰황새냉이",
+    description: "논리적이고 창의적인 INTP처럼, 큰황새냉이는 다양한 환경에 적응하며 독특한 특성을 가집니다."
+  },
+  ESTP: {
+    plant: "담쟁이덩굴",
+    description: "활동적이고 적응력 있는 ESTP처럼, 담쟁이덩굴은 다양한 환경에 빠르게 적응하며 성장합니다."
+  },
+  ESFP: {
+    plant: "붉은병꽃나무",
+    description: "자유로운 영혼과 매력적인 ESFP처럼, 붉은병꽃나무는 화려한 꽃으로 주변을 밝게 만듭니다."
+  },
+  ENFP: {
+    plant: "왕벚나무",
+    description: "열정적이고 창의적인 ENFP처럼, 왕벚나무는 화려한 꽃을 피워 사람들에게 기쁨을 줍니다."
+  },
+  ENTP: {
+    plant: "왕고들빼기",
+    description: "창의적이고 논쟁을 즐기는 ENTP처럼, 왕고들빼기는 독특한 특성을 가지고 다양한 환경에서 자랍니다."
+  },
+  ESTJ: {
+    plant: "큰각시취",
+    description: "체계적이고 실용적인 ESTJ처럼, 큰각시취는 강인하고 적응력이 뛰어나며 넓은 지역에 분포합니다."
+  },
+  ESFJ: {
+    plant: "참골무꽃",
+    description: "친절하고 협조적인 ESFJ처럼, 참골무꽃은 아름다운 꽃을 피우며 주변 환경과 조화를 이룹니다."
+  },
+  ENFJ: {
+    plant: "푼지나무",
+    description: "카리스마 있고 영감을 주는 ENFJ처럼, 푼지나무는 다른 식물들을 지지하며 함께 성장합니다."
+  },
+  ENTJ: {
+    plant: "왕작살나무",
+    description: "대담하고 결단력 있는 ENTJ처럼, 왕작살나무는 큰 나무로 성장하며 주변 환경을 주도합니다."
+  }
+};
+
+const MBTIPlantMatcher = () => {
+  const [selectedType, setSelectedType] = useState(null);
+
+  const handleTypeClick = (type) => {
+    setSelectedType(type);
+  };
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">나의 MBTI에 맞는 식물 찾기</h1>
+      <div className="grid grid-cols-4 gap-2 mb-4">
+        {Object.keys(mbtiPlants).map((type) => (
+          <Button
+            key={type}
+            onClick={() => handleTypeClick(type)}
+            variant={selectedType === type ? "default" : "outline"}
+          >
+            {type}
+          </Button>
+        ))}
+      </div>
+      {selectedType && (
+        <Card>
+          <CardHeader>
+            <h2 className="text-xl font-semibold">{selectedType}의 식물: {mbtiPlants[selectedType].plant}</h2>
+          </CardHeader>
+          <CardContent>
+            <p><Leaf className="inline-block mr-2" />{mbtiPlants[selectedType].description}</p>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+};
+
+export default MBTIPlantMatcher;
